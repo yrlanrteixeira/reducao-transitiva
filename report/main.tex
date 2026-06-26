@@ -1,48 +1,101 @@
-\documentclass[10pt,twocolumn]{article}
+\documentclass{sbc2023}%
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
-\usepackage{times}
-\usepackage{amsmath,amssymb}
 \usepackage{graphicx}
+%\usepackage[utf8]{inputenc}
+\usepackage[misc,geometry]{ifsym} 
+\usepackage{fontspec}
+\usepackage{fontawesome}
+\usepackage{academicons}
+\usepackage{color}
+\usepackage{hyperref} 
+\usepackage{aas_macros}
+\usepackage[bottom]{footmisc}
+\usepackage{supertabular}
+\usepackage{afterpage}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.16}
-\usepackage{url}
-\usepackage{abstract}
 
 % Ambiente simples de pseudocódigo (flutuante), sem dependências externas
 \usepackage{float}
 \newfloat{algoritmo}{t}{loa}
 \floatname{algoritmo}{Algoritmo}
 
-% Nomes em português (sem depender do babel)
-\renewcommand{\abstractname}{Resumo}
-\renewcommand{\tablename}{Tabela}
-\renewcommand{\figurename}{Figura}
-\renewcommand{\refname}{Referências}
+\setcitestyle{square}
 
-\setlength{\columnsep}{0.8cm}
+\definecolor{orcidlogo}{rgb}{0.37,0.48,0.13}
+\definecolor{unilogo}{rgb}{0.16, 0.26, 0.58}
+\definecolor{maillogo}{rgb}{0.58, 0.16, 0.26}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.0}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+%\hypersetup{colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue}
 
-\title{\textbf{Redução Transitiva de Grafos Direcionados\\baseada em Caminhamento em Profundidade}}
+%%%%%%% IMPORTANT: We disable hyperlinks by default with this line, to avoid the error "\pdfendlink ended up in different nesting level" while writing.
+%\hypersetup{draft}
 
-\author{
-Yrlan Rangel Teixeira$^1$\\[2mm]
-\small $^1$Instituto de Ciências Exatas e Informática, PUC Minas\\
-\small Projeto e Análise de Algoritmos, Prof. Silvio Jamil F. Guimarães, 2026/1
+\jid{JBCS}
+\jtitle{Journal of the Brazilian Computer Society, 202X, XX:1, }
+\doi{10.5753/jbcs.202X.XXXXXX}
+\copyrightstatement{This work is licensed under a Creative Commons Attribution 4.0 International License}
+\jyear{202X}
+
+
+\title[Presenting the JBCS template]{Presenting the JBCS template}
+
+%THE ORCID IS MANDATORY FOR EACH AUTHOR IN JBCS
+\author[Teixeira et al. 202X]{
+\affil{\textbf{Yrlan Rangel Teixeira}~\textcolor{blue}{\faEnvelopeO}~~[~\textbf{Pontifícia Universidade Católica de Minas Gerais}~|\href{mailto:yrlan.rangel@sga.pucminas.br}{~\textbf{\textit{yrlan.rangel@sga.pucminas.br}}}~]}
+
+\affil{\textbf{Hugo Alves Duarte}~~[~\textbf{Pontifícia Universidade Católica de Minas Gerais}~|\href{mailto:hduarte@sga.pucminas.br}{~\textbf{\textit{hduarte@sga.pucminas.br}}}~]}
+
+\affil{\textbf{Pedro Henrique Debs Rabelo}~~[~\textbf{Pontifícia Universidade Católica de Minas Gerais}~|\href{mailto:pedrodebs1@gmail.com}{~\textbf{\textit{pedrodebs1@gmail.com}}}~]}
+
+\affil{\textbf{Gabriel Reis Villela}~~[~\textbf{Pontifícia Universidade Católica de Minas Gerais}~|\href{mailto:gabriel.villela@sga.pucminas.br}{~\textbf{\textit{gabriel.villela@sga.pucminas.br}}}~]}
+
+\affil{\textbf{Gilson Júnio Pacheco Silva}~~[~\textbf{Pontifícia Universidade Católica de Minas Gerais}~|\href{mailto:gilson.pacheco@sga.pucminas.br}{~\textbf{\textit{gilson.pacheco@sga.pucminas.br}}}~]}
+
+\affil{\textbf{Daniel Valadares Souza}~~[~\textbf{Pontifícia Universidade Católica de Minas Gerais}~|\href{mailto:danielvsouza25@gmail.com}{~\textbf{\textit{danielvsouza25@gmail.com}}}~]}
+
+
+\affil{\textbf{Vinicius Figueiredo Ferreira}~~[~\textbf{Pontifícia Universidade Católica de Minas Gerais}~]}
 }
-\date{}
 
 \begin{document}
 
-\twocolumn[
+\begin{frontmatter}
 \maketitle
-\begin{onecolabstract}
+
+\begin{mail}
+Instituto de Ciências Exatas e Informática, Pontifícia Universidade Católica de Minas Gerais, Av. Dom José Gaspar, 500 - Coração Eucarístico, Belo Horizonte - MG, 30535-901, Brasil.
+\end{mail}
+
+\begin{dates}
+% This information will be provided by the editor befeore publishing the paper
+\small{\textbf{Received:} DD Month YYYY~~~$\bullet$~~~\textbf{Accepted:} DD Month YYYY~~~$\bullet$~~~\textbf{Published:} DD Month YYYY}
+
+\end{dates}
+
+
+\begin{abstract}
+\textbf{Abstract.~}
 \noindent A redução transitiva de um grafo direcionado $G=(V,E)$ produz um grafo $G'$ com o menor número de arestas que preserva a atingibilidade de todos os vértices de $G$. Este trabalho apresenta a implementação, em C++, de um algoritmo de redução transitiva para grafos direcionados acíclicos (DAGs) baseado em caminhamento em profundidade (DFS), com complexidade $O(|V|\cdot(|V|+|E|))$. Descrevemos a representação do grafo adotada (lista de adjacência) e a justificamos, apresentamos um verificador formal de corretude e relatamos experimentos com DAGs aleatórios de até $3{,}2\times 10^3$ vértices e $10^6$ arestas, nos quais o tempo de execução observado é compatível com a análise assintótica. Discutimos, por fim, por que o conceito de redução transitiva não se transfere diretamente para grafos não direcionados e o que ocorreria com a nossa implementação nesse cenário.
-\vspace{4mm}
-\end{onecolabstract}
-]
+\end{abstract}
+
+\begin{keywords}
+Grafos
+\end{keywords}
+
+%\begin{license}
+%Published under the Creative Commons Attribution 4.0 International Public License (CC BY 4.0)
+%\end{license}
+
+\end{frontmatter}
 
 \section{Introdução}
 \label{sec:intro}
@@ -182,16 +235,7 @@ Implementamos em C++ a redução transitiva de DAGs por caminhamento em profundi
 
 O trabalho foi integralmente desenvolvido por \textbf{Yrlan Rangel Teixeira}: implementação de todos os módulos em C++ (representação do grafo, caminhamentos, algoritmo de redução transitiva, gerador de instâncias e verificador de corretude), execução e análise dos experimentos e redação deste relatório.
 
-\begin{thebibliography}{9}
-\bibitem{aho1972}
-A.~V. Aho, M.~R. Garey, J.~D. Ullman.
-\newblock The transitive reduction of a directed graph.
-\newblock \emph{SIAM Journal on Computing}, v.~1, n.~2, p.~131 a 137, 1972.
-
-\bibitem{cormen}
-T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, C.~Stein.
-\newblock \emph{Introduction to Algorithms}, 4.~ed.
-\newblock MIT Press, 2022.
-\end{thebibliography}
+\bibliographystyle{apalike-sol}
+\bibliography{refs}
 
 \end{document}

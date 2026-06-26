@@ -4,7 +4,12 @@
 *.o
 
 # Artefatos LaTeX
+*.fdb_latexmk
+*.out
 *.aux
+*.bbl
+*.blg
+*.fls
 *.log
 *.toc
 *.synctex.gz
