@@ -6,9 +6,11 @@ Implementação em C++ de redução transitiva de DAGs baseada em caminhamento (
 
 - `include/`: headers com as interfaces dos módulos (Grafo, Caminhamento, ReducaoTransitiva, GrafoIO, Verificador, GeradorDag).
 - `src/`: implementações da biblioteca, um arquivo por módulo.
-- `Makefile`: build do projeto.
-
-A base versionada contém o build, as interfaces dos módulos e a implementação do módulo `Grafo`. As demais implementações (`src/`), os executáveis (`apps/`), os casos de teste, os experimentos e o relatório são adicionados por cada responsável.
+- `apps/`: implementação dos executaveis, um arquivo por executavel.
+- `Makefile` e `CMakeLists.txt`: build do projeto.
+- `report/`: PDF e código LaTeX do relatório do trabalho.
+- `experiments/`: dados do benchmark.
+- `tests/`: arquivos de input para os testes.
 
 ## Compilação
 
@@ -31,7 +33,7 @@ make
 
 ### Executáveis
 
-Com todos os módulos implementados, gera os binários em `bin/`:
+O build gera os binários em `bin/`:
 
 - `reducao_transitiva`: lê o grafo e produz a redução transitiva.
 - `gerador`: gera DAGs aleatórios para experimentos.
